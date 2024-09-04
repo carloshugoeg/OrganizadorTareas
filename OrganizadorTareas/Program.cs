@@ -34,14 +34,15 @@ do
 
 void CompletarTarea()
 {
+    (List<Tarea> Incompletas, List<Tarea> Completas) = SortTareas(Tareas);
     Console.Clear();
-    if (Tareas.Count == 0)
+    if (Incompletas.Count == 0)
     {
+        Console.WriteLine("NO SE ENCONTRARON TAREAS INCOMPLETAS EN EL SISTEMA\n");
         MensajeNoTareas();
         return;
     }
-    (List<Tarea> Incompletas, List<Tarea> Completas) = SortTareas(Tareas);
-    Console.ForegroundColor = ConsoleColor.Gray;
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
     Console.WriteLine(" ╔═══════════════════════════════════════════════╗");
     Console.WriteLine(" ║                COMPLETAR TAREA                ║");
     Console.WriteLine(" ╚═══════════════════════════════════════════════╝\n");
@@ -51,11 +52,12 @@ void CompletarTarea()
     {
         Console.WriteLine($"\n  {i + 1}. {t.GetName()}"); i++;
     }
+    Console.ForegroundColor = ConsoleColor.Gray;
     (int left, int top) = Console.GetCursorPosition();
     do
     {
         Console.SetCursorPosition(left, top);
-        Console.Write("Seleccione una tarea incompleta para completarla: ");
+        Console.Write("\nSeleccione una tarea incompleta para completarla: ");
         string tareaIncompleta = Console.ReadLine();
         int.TryParse(tareaIncompleta, out i);
         try
@@ -68,6 +70,8 @@ void CompletarTarea()
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Esa tarea no existe\nPresione ENTER para continuar");
             Console.ReadLine();
+            Console.SetCursorPosition(left, top);
+            Console.WriteLine("                                                       \n                                                                    \n                                                            \n                                           ");
             Console.ResetColor();
         }
 
