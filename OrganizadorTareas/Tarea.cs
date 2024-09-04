@@ -25,16 +25,18 @@ namespace OrganizadorTareas
             Console.WriteLine("--------TAREA---------");
             Console.WriteLine("\nNombre: " + Nombre);
             Console.WriteLine("\nDescripcion: " +  Descripcion);
-            Console.Write("\nCompletada: ");
-            if (Completada) Console.WriteLine("Si");
-            else Console.WriteLine("No");
         }
         
-        public void CompletarTarea(bool completada) => Completada = completada;
+        public void CompletarTarea() => Completada = true;
 
         public bool GetCompletada()
         {
 
         return Completada; }
+
+        public string GetName()
+        {
+            return Nombre;
+        }
     }
 }

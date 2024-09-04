@@ -1,4 +1,5 @@
 ﻿using OrganizadorTareas;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 List <Tarea> Tareas = new List<Tarea>();
 do
@@ -28,6 +29,45 @@ do
     }
 } while(true);
 
+void CompletarTarea()
+{
+    Console.Clear();
+    if (Tareas.Count == 0)
+    {
+        MensajeNoTareas();
+        return;
+    }
+    (List<Tarea> Incompletas, List<Tarea> Completas) = SortTareas(Tareas);
+    Console.ForegroundColor = ConsoleColor.Gray;
+    Console.WriteLine(" ╔═══════════════════════════════════════════════╗");
+    Console.WriteLine(" ║                COMPLETAR TAREA                ║");
+    Console.WriteLine(" ╚═══════════════════════════════════════════════╝\n");
+    Console.WriteLine("   TAREAS INCOMPLETAS: ");
+    int i = 0;
+    foreach(Tarea t in Incompletas)
+    {
+        Console.WriteLine($"\n  {i + 1}. {t.GetName()}");
+    }
+    (int left, int top) = Console.GetCursorPosition();
+    do
+    {
+        Console.SetCursorPosition(left, top);
+        Console.Write("Seleccione una tarea incompleta para completarla: ");
+        string tareaIncompleta = Console.ReadLine();
+        int.TryParse(tareaIncompleta, out i);
+        try
+        {
+
+        }
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Esa tarea no existe\nPresione ENTER para continuar");
+            Console.ReadLine();
+        }
+
+    } while (true);
+}
 void AgregarTarea()
 {
     string nombre = null, descripcion = null;
@@ -123,3 +163,4 @@ void MensajeConfirmacion()
     }
     return (Incompletas, Completadas);
 }
+
