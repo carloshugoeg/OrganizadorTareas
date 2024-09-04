@@ -26,6 +26,9 @@ do
         case "2":
             VerTareas();
             break;
+        case "3":
+            CompletarTarea();
+            break;
     }
 } while(true);
 
@@ -46,7 +49,7 @@ void CompletarTarea()
     int i = 0;
     foreach(Tarea t in Incompletas)
     {
-        Console.WriteLine($"\n  {i + 1}. {t.GetName()}");
+        Console.WriteLine($"\n  {i + 1}. {t.GetName()}"); i++;
     }
     (int left, int top) = Console.GetCursorPosition();
     do
@@ -57,16 +60,21 @@ void CompletarTarea()
         int.TryParse(tareaIncompleta, out i);
         try
         {
-
+            Incompletas[i - 1].CompletarTarea();
+            break ;
         }
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Esa tarea no existe\nPresione ENTER para continuar");
             Console.ReadLine();
+            Console.ResetColor();
         }
 
     } while (true);
+    MensajeCompletada();
+
+
 }
 void AgregarTarea()
 {
@@ -110,13 +118,26 @@ void VerTareas()
     Console.WriteLine(" ║                 COMPLETADAS...                ║");
     Console.WriteLine(" ╚═══════════════════════════════════════════════╝\n");
     foreach (Tarea Tarea in Completas) Tarea.MostrarInfo();
-    Console.WriteLine(" \n╔═══════════════════════════════════════════════╗");
+    Console.WriteLine("\n ╔═══════════════════════════════════════════════╗");
     Console.WriteLine(" ║                 INCOMPLETAS...                ║");
     Console.WriteLine(" ╚═══════════════════════════════════════════════╝\n");
     foreach (Tarea Tarea in Incompletas) Tarea.MostrarInfo();
     Console.ReadLine();
 }
 
+void MensajeCompletada()
+{
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine(" \n ╔═══════════════════════════════════════════════╗");
+    Console.WriteLine(" ║        ¡TAREA COMPLETADA EXITOSAMENTE!        ║");
+    Console.WriteLine(" ╠═══════════════════════════════════════════════╣");
+    Console.WriteLine(" ║   La tarea se ha completado con exito         ║");
+    Console.WriteLine(" ║                                               ║");
+    Console.WriteLine(" ║   Presione Enter para continuar               ║");
+    Console.WriteLine(" ╚═══════════════════════════════════════════════╝");
+    Console.ReadLine();
+}
 void MensajeNoTareas()
 {
     Console.ForegroundColor = ConsoleColor.Red;

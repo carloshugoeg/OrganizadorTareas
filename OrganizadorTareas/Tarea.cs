@@ -25,6 +25,7 @@ namespace OrganizadorTareas
             Console.WriteLine("--------TAREA---------");
             Console.WriteLine("\nNombre: " + Nombre);
             Console.WriteLine("\nDescripcion: " +  Descripcion);
+            Console.WriteLine();
         }
         
         public void CompletarTarea() => Completada = true;
