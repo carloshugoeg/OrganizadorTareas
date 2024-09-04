@@ -31,5 +31,10 @@ namespace OrganizadorTareas
         }
         
         public void CompletarTarea(bool completada) => Completada = completada;
+
+        public bool GetCompletada()
+        {
+
+        return Completada; }
     }
 }
